@@ -61,14 +61,14 @@ class Ingestor(DataIngestor):
             return self._load_df(file_path)
                     
 
-if __name__ == "__main__":
-    current_dir = os.path.dirname(__file__)
-    file_path = os.path.join(current_dir, "..", "test_data", "archive.zip")
-    file_path = os.path.abspath(file_path)
+# if __name__ == "__main__":
+#     current_dir = os.path.dirname(__file__)
+#     file_path = os.path.join(current_dir, "..", "test_data", "archive.zip")
+#     file_path = os.path.abspath(file_path)
 
 
-    ingestor = Ingestor()
-    df = ingestor.ingest(file_path)
-    print(df.head()) 
+#     ingestor = Ingestor()
+#     df = ingestor.ingest(file_path)
+#     print(df.head()) 
 
     

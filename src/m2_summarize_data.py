@@ -1,12 +1,12 @@
 import pandas as pd
-from m1_ingest_data import Ingestor
 import os
 
 class GetSummary():
+
     def __init__(self, df) -> pd.DataFrame:
         self.df = df
 
-    def get_summary(self):
+    def get_summary(self, df):
         print("Running basic validation...")
         print("Shape:", self.df.shape)
         print("Duplicates:", self.df.duplicated().sum())
