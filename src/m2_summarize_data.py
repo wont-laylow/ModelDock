@@ -7,12 +7,15 @@ class GetSummary():
         self.df = df
 
     def get_summary(self, df):
-        print("Running basic validation...")
-        print("Shape:", self.df.shape)
-        print("Duplicates:", self.df.duplicated().sum())
-        print("Missing values:\n", self.df.isnull().sum())
-        print("Data types:\n", self.df.dtypes)
-        print("Statistical summary:", self.df.describe(include='all'))
+        
+        summary_report = {
+        "Shape": self.df.shape,
+        "Duplicate Rows": self.df.duplicated().sum(),
+        "Missing Values": self.df.isnull().sum().to_frame(name="Missing Count"),
+        "Data Types": self.df.dtypes.to_frame(name="Data Type"),
+        "Statistical Summary": self.df.describe(include='all').transpose()
+        }
+        return summary_report
 
 
 # if __name__ == "__main__":
