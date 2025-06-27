@@ -10,47 +10,49 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 
 class MissingValues(ABC):
     @abstractmethod
-    def analyse(self, df):
+    def analyze(self):
         pass
 
     @abstractmethod
-    def drop_null(self, df: pd.DataFrame) -> pd.DataFrame:
+    def drop_null(self) -> pd.DataFrame:
         pass
 
     @abstractmethod
-    def handle_null(self, df: pd.DataFrame, strategy: str = "mean", fill_constant=None) -> pd.DataFrame:
+    def handle_null(self, strategy: str = "mean", fill_constant=None) -> pd.DataFrame:
         pass
 
 
-class Handle(MissingValues):
+class HandleMissingValues(MissingValues):
 
-    def __init__(self, axis=0, thresh=None):
+    def __init__(self, df: pd.DataFrame, axis=0, thresh=None, figsize: tuple = (12, 8)):
         self.is_missing_values = False
         self.axis = axis
         self.thresh = thresh
+        self.df = df
+        self.figsize = figsize
 
-    def analyze(self, df, cmap: str = "coolwarm" ):
+    def analyze(self, cmap: str = "coolwarm" ):
         """
         Function to display null values on a heatmap
         """
         print("Generating heatmap")
-        plt.figure(figsize=(12, 8))
-        sns.heatmap(data=df.isnull(), cbar=True, cmap=cmap)
+        plt.figure(figsize= self.figsize)
+        sns.heatmap(data=self.df.isnull(), cbar=True, cmap=cmap)
         plt.title("Missing Values Heatmap")
-        plt.show()
+        plt.show() 
 
-    def drop_null(self, df: pd.DataFrame) -> pd.DataFrame:
+    def drop_null(self) -> pd.DataFrame:
         """
         Function to drop all null values in the dataset
         """
         logging.info(f"Dropping missing values with axis={self.axis} and thresh={self.thresh}")
 
-        df_cleaned = df.dropna(axis=self.axis, thresh=self.thresh)
+        df_cleaned = self.df.dropna(axis=self.axis, thresh=self.thresh)
 
         logging.info("Missing values dropped.")
         return df_cleaned
 
-    def handle_null(self, strategy: str= "mean", fill_constant=None):
+    def handle_null(self, strategy: str= "mean", fill_constant=None)-> pd.DataFrame:
         """
         Function to display null values in the dataset
         """

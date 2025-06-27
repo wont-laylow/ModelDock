@@ -1,19 +1,19 @@
 import pandas as pd
 import os
 
+
 class GetSummary():
 
     def __init__(self, df) -> pd.DataFrame:
         self.df = df
 
-    def get_summary(self, df):
-        
+    def get_summary(self):
         summary_report = {
-        "Shape": self.df.shape,
-        "Duplicate Rows": self.df.duplicated().sum(),
-        "Missing Values": self.df.isnull().sum().to_frame(name="Missing Count"),
-        "Data Types": self.df.dtypes.to_frame(name="Data Type"),
-        "Statistical Summary": self.df.describe(include='all').transpose()
+            "Shape": self.df.shape,
+            "Duplicate Rows": self.df.duplicated().sum(),
+            "Missing Values": self.df.isnull().sum().to_frame(name="Missing Count"),
+            "Data Types": self.df.dtypes.to_frame(name="Data Type"),
+            "Statistical Summary": self.df.describe(include='all').transpose()
         }
         return summary_report
 
@@ -24,7 +24,7 @@ class GetSummary():
 #     file_path = os.path.abspath(file_path)
 
 #     summary = GetSummary()
-#     summary.get_summary()
+#     print(summary.get_summary())
 
 
     
