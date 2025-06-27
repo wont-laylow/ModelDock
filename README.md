@@ -1,4 +1,4 @@
-**MODELDOCK**
+# **MODELDOCK**
 
 ModelDock is an end-to-end machine learning pipeline that lets you drop any dataset (CSV, Excel, Parquet, or zipped versions) and automatically performs data ingestion, cleaning, validation, exploratory analysis, feature engineering, model selection, training, and evaluation — delivering a ready-to-use model for inference.
 

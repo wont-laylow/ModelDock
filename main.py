@@ -1,6 +1,1 @@
-def main():
-    print("Hello from mason-ml!")
-
-
-if __name__ == "__main__":
-    main()
+from src.m1_ingest_data import Ingestor

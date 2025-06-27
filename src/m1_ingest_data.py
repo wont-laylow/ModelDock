@@ -8,7 +8,9 @@ from abc import ABC, abstractmethod
 class DataIngestor(ABC):
     @abstractmethod
     def ingest(self, file_path: str) -> pd.DataFrame:
-        """Abstract Method to ingest any form of data uploaded"""
+        """
+        Abstract Method to ingest any form of data uploaded
+        """
         pass
 
 class Ingestor(DataIngestor):
@@ -17,6 +19,9 @@ class Ingestor(DataIngestor):
         self.supported_formats = ['.csv', '.xlsx', '.xls', '.parquet']
 
     def _unzip_files(self, file_path):
+        """"
+        Function to unzip zip files.
+        """
         with zipfile.ZipFile(file_path, "r") as zip_ref:
             zip_ref.extractall(self.temp_dir)
 
@@ -24,6 +29,9 @@ class Ingestor(DataIngestor):
 
 
     def _load_df(self, file_path: str) -> pd.DataFrame:
+        """
+        Function to load a dataset into pandas dataframe.
+        """
         extension = os.path.splitext(file_path)[1].lower()
         if extension == ".csv":
             return pd.read_csv(file_path)
@@ -36,6 +44,9 @@ class Ingestor(DataIngestor):
 
 
     def ingest(self, file_path: str) -> pd.DataFrame:
+        """
+        Function that combines the above two functions to ingest the data.
+        """
         if file_path.lower().endswith("zip"):
             extracted_path = self._unzip_files(file_path)
 
